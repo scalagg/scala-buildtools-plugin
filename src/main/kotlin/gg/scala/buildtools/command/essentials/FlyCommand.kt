@@ -44,20 +44,4 @@ object FlyCommand : ScalaCommand()
             "${if (player.bukkit().isFlying) CC.GREEN else CC.RED}You've ${if (player.bukkit().isFlying) "enabled" else "disabled"} flight."
         )
     }
-
-    @Default
-    @CommandCompletion("@players")
-    @CommandPermission("buildtools.command.fly.other")
-    fun onDefaultOther(
-        sender: CommandSender, player: ScalaPlayer
-    )
-    {
-        player.bukkit().toggleFlight()
-
-        sender.sendMessage(
-            "${CC.SEC}You've ${
-                if (player.bukkit().isFlying) "enabled" else "disabled"
-            } flight for ${player.bukkit().name}${CC.SEC}."
-        )
-    }
 }

@@ -9,6 +9,7 @@ import gg.scala.commons.command.ScalaCommand
 import gg.scala.commons.issuer.ScalaPlayer
 import net.evilblock.cubed.util.CC
 import org.bukkit.GameMode
+import org.bukkit.entity.Player
 
 /**
  * @author Topu
@@ -21,12 +22,11 @@ object GamemodeCommand : ScalaCommand()
     @CommandCompletion("@players")
     @CommandPermission("buildtools.command.gmc")
     fun onGmc(
-        player: ScalaPlayer, @Optional target: ScalaPlayer?
+        player: ScalaPlayer
     )
     {
         performGamemodeSwitch(
             player = player,
-            target = target,
             gameMode = GameMode.CREATIVE
         )
     }
@@ -35,12 +35,11 @@ object GamemodeCommand : ScalaCommand()
     @CommandCompletion("@players")
     @CommandPermission("buildtools.command.gms")
     fun onGms(
-        player: ScalaPlayer, @Optional target: ScalaPlayer?
+        player: ScalaPlayer
     )
     {
         performGamemodeSwitch(
             player = player,
-            target = target,
             gameMode = GameMode.SURVIVAL
         )
     }
@@ -49,12 +48,11 @@ object GamemodeCommand : ScalaCommand()
     @CommandCompletion("@players")
     @CommandPermission("buildtools.command.gmsp")
     fun onGmsp(
-        player: ScalaPlayer, @Optional target: ScalaPlayer?
+        player: ScalaPlayer
     )
     {
         performGamemodeSwitch(
             player = player,
-            target = target,
             gameMode = GameMode.SPECTATOR
         )
     }
@@ -63,30 +61,19 @@ object GamemodeCommand : ScalaCommand()
     @CommandCompletion("@players")
     @CommandPermission("buildtools.command.gma")
     fun onGma(
-        player: ScalaPlayer, @Optional target: ScalaPlayer?
+        player: ScalaPlayer
     )
     {
         performGamemodeSwitch(
             player = player,
-            target = target,
             gameMode = GameMode.ADVENTURE
         )
     }
 
     private fun performGamemodeSwitch(
-        player: ScalaPlayer, target: ScalaPlayer?, gameMode: GameMode
+        player: ScalaPlayer, gameMode: GameMode
     )
     {
-        if (target != null)
-        {
-            player.sendMessage(
-                "${CC.SEC}You've set ${target.bukkit().name}'s${CC.SEC} gamemode to ${CC.GREEN}${gameMode.name.lowercase()}${CC.SEC}."
-            )
-
-            target.bukkit().gameMode = gameMode
-            return
-        }
-
         player.sendMessage(
             "${CC.SEC}You've set your gamemode to ${CC.GREEN}${gameMode.name.lowercase()}${CC.SEC}."
         )
